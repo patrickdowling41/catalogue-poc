@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/catalogue-e2e"
+    },
+    {
+      "path": "./apps/catalogue"
+    },
+    {
+      "path": "./browse-e2e"
+    },
+    {
+      "path": "./browse"
+    },
+    {
+      "path": "./apps/browse-e2e"
+    },
+    {
+      "path": "./apps/browse"
+    }
+  ]
+}
