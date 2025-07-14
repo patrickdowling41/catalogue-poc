@@ -5,6 +5,12 @@
   "references": [
     {
       "path": "./apps/browse"
+    },
+    {
+      "path": "./apps/bff"
+    },
+    {
+      "path": "./apps/pdp"
     }
   ]
 }

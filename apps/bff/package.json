@@ -1,0 +1,20 @@
+{
+  "name": "@catalogue/bff",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "tsup src/main.ts",
+    "dev": "tsx src/main.ts"
+  },
+  "dependencies": {
+    "@remix-run/express": "^2.16.8",
+    "@remix-run/node": "^2.16.8",
+    "cors": "^2.8.5",
+    "http-proxy-middleware": "^3.0.5",
+    "tsx": "^4.20.3"
+  },
+  "devDependencies": {
+    "@nx/node": "21.2.3",
+    "tsup": "^8.5.0"
+  }
+}
