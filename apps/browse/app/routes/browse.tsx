@@ -1,6 +1,6 @@
 import App from '../App';
 
-export default function Index() {
+export default function Browse() {
   return (
     <div>
       <App />
