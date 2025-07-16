@@ -7,10 +7,10 @@
       "path": "./apps/browse"
     },
     {
-      "path": "./apps/bff"
+      "path": "./apps/pdp"
     },
     {
-      "path": "./apps/pdp"
+      "path": "./apps/backend"
     }
   ]
 }
