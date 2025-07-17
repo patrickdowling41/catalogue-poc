@@ -2,8 +2,15 @@
   "name": "@catalogue/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "npx nx run-many -t dev"
+  },
   "private": true,
+  "workspaces": [
+    "apps/backend",
+    "apps/browse",
+    "apps/pdp"
+  ],
   "dependencies": {
     "@react-router/node": "^7.2.0",
     "@react-router/serve": "^7.2.0",

@@ -3,18 +3,23 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const router: Router = Router();
 
+const browseProxy = createProxyMiddleware({
+  target: 'http://localhost:5173',
+  changeOrigin: true,
+});
+
+const productProxy = createProxyMiddleware({
+  target: 'http://localhost:5174',
+  changeOrigin: true,
+});
+
 router.use('/__manifest', (req, res, next) => {
   const referer = req.headers.referer || '';
+  req.url = `/__manifest${req.url.slice(1)}`;
   if (referer.includes('/browse')) {
-    return createProxyMiddleware({
-      target: 'http://localhost:5173',
-      changeOrigin: true,
-    })(req, res, next);
+    return browseProxy(req, res, next);
   } else if (referer.includes('/product')) {
-    return createProxyMiddleware({
-      target: 'http://localhost:5174',
-      changeOrigin: true,
-    })(req, res, next);
+    return productProxy(req, res, next);
   }
 });
 
