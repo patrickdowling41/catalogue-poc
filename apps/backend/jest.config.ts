@@ -1,5 +1,5 @@
 export default {
-  displayName: '@catalogue/bff',
+  displayName: '@catalogue/backend',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

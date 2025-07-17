@@ -3,7 +3,7 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "tsup apps/bff/src/main.ts"
+        "command": "tsup apps/backend/src/main.ts"
       }
     },
     "test": {
