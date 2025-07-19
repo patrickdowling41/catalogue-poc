@@ -9,7 +9,7 @@ import type { MetaFunction, LinksFunction } from '@remix-run/node';
 
 export const meta: MetaFunction = () => [
   {
-    title: 'New Remix App',
+    title: 'Officeworks Category',
   },
 ];
 
@@ -36,7 +36,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <base href="http://localhost:5173/" />
         <Meta />
         <Links />
       </head>
