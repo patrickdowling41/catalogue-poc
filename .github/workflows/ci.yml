@@ -33,11 +33,11 @@ jobs:
       # - run: pnpm exec nx-cloud record -- echo Hello World
       # As your workspace grows, you can change this to use Nx Affected to run only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
       # When you enable task distribution, run the e2e-ci task instead of e2e
-      - run: npm exec nx run-many -t lint test
+      - run: npx nx run-many -t lint test
 
-      - run: npm exec nx run-many -t build
+      - run: npx nx run-many -t build
         # If you want to run the e2e tests, uncomment the following line
-        # - run: npm exec nx run-many -t e2e --parallel --maxParallel=3
+        # - run: npx nx run-many -t e2e --parallel --maxParallel=3
       # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/ci/features/self-healing-ci
-      - run: npm exec nx fix-ci
+      - run: npx nx fix-ci
         if: always()
