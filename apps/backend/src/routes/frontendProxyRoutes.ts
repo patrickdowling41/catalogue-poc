@@ -13,14 +13,21 @@ const productProxy = createProxyMiddleware({
   changeOrigin: true,
 });
 
-router.use('/__manifest', (req, res, next) => {
+router.use('*', (req, res, next) => {
   const referer = req.headers.referer || '';
-  req.url = `/__manifest${req.url.slice(1)}`;
+
+  // Handles Express stripping __manifest from the URL
+  if (req.baseUrl.startsWith('/__manifest')) {
+    req.url = req.url.replace('/', '/__manifest');
+  }
+
+  // Proxy Requests from referer back to the correct frontend
   if (referer.includes('/category')) {
     return categoryProxy(req, res, next);
   } else if (referer.includes('/product')) {
     return productProxy(req, res, next);
   }
+  next();
 });
 
 router.use(
