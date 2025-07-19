@@ -31,7 +31,7 @@ router.use('*', (req, res, next) => {
   }
 
   // Proxy Requests from referer back to the correct frontend
-  if (referer.includes('/browse')) {
+  if (referer.includes('/category')) {
     return createProxyMiddleware({
       target: 'http://localhost:5173',
       changeOrigin: true,

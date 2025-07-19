@@ -1,17 +1,17 @@
 import { createRemixStub } from '@remix-run/testing';
 import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
-import Index from '../../app/routes/_index';
+import Product from '../../app/routes/product.$product';
 
 test('renders loader data', async () => {
   const RemixStub = createRemixStub([
     {
-      path: '/',
-      Component: Index,
+      path: '/abc123',
+      Component: Product,
     },
   ]);
 
   render(<RemixStub />);
 
-  await screen.findByText('Category');
+  await screen.findByText('Product');
 });
