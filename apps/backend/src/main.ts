@@ -14,6 +14,8 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use('/api/product', productRoutes);
 
-app.listen(3000, () => {
-  console.log('Gateway listening on http://localhost:3000');
+app.listen(process.env.PORT, () => {
+  console.log(
+    `Gateway listening on ${process.env.BASE_URL}:${process.env.PORT}`
+  );
 });

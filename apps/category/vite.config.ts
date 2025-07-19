@@ -25,4 +25,5 @@ export default defineConfig({
   server: {
     port: 5173,
   },
+  base: `${process.env.BASE_URL}:${process.env.PORT}/`,
 });

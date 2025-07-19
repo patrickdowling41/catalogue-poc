@@ -1,9 +1,11 @@
 import {
+  json,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from '@remix-run/react';
 import type { MetaFunction, LinksFunction } from '@remix-run/node';
 
@@ -36,7 +38,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <base href="http://localhost:5174/" />
+        {/* <base href={`${REMIX_BASE_URL}:${REMIX_PORT}/`} /> */}
         <Meta />
         <Links />
       </head>
