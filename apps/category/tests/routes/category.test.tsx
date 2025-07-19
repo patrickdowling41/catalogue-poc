@@ -1,7 +1,7 @@
 import { createRemixStub } from '@remix-run/testing';
 import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
-import Category from '../../app/routes/category';
+import Category from '../../app/routes/category.$category';
 
 test('renders loader data', async () => {
   const RemixStub = createRemixStub([
@@ -13,5 +13,5 @@ test('renders loader data', async () => {
 
   render(<RemixStub />);
 
-  await screen.findByText('Category');
+  await screen.findByText('Category - electronics');
 });

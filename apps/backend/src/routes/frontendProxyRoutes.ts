@@ -31,7 +31,7 @@ router.use('*', (req, res, next) => {
 });
 
 router.use(
-  '/category',
+  '/category/*',
   createProxyMiddleware({
     target: 'http://localhost:5173',
     changeOrigin: true,
