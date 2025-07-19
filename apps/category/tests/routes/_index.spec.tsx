@@ -13,5 +13,5 @@ test('renders loader data', async () => {
 
   render(<RemixStub />);
 
-  await screen.findByText('Hello there,');
+  await screen.findByText('Category');
 });
