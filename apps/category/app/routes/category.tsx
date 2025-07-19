@@ -1,9 +1,11 @@
 import App from '../App';
 
-export default function Index() {
+const Category = () => {
   return (
     <div>
       <App />
     </div>
   );
-}
+};
+
+export default Category;
