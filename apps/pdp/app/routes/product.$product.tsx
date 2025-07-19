@@ -1,9 +1,9 @@
-import NxWelcome from '../nx-welcome';
+import App from '../App';
 
 export default function Product() {
   return (
     <div>
-      <NxWelcome title={'@catalogue/pdp'} />
+      <App />
     </div>
   );
 }
