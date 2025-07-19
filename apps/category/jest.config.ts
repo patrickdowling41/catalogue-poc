@@ -10,7 +10,7 @@ const swcJestConfig = JSON.parse(
 swcJestConfig.swcrc = false;
 
 export default {
-  displayName: '@catalogue/browse',
+  displayName: '@catalogue/category',
   preset: '../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': ['@swc/jest', swcJestConfig],

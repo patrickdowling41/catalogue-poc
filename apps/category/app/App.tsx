@@ -1,5 +1,5 @@
 export function App() {
-  return <div>Browse</div>;
+  return <div>Category</div>;
 }
 
 export default App;

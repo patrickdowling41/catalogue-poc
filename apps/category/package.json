@@ -1,5 +1,5 @@
 {
-  "name": "@catalogue/browse",
+  "name": "@catalogue/category",
   "private": true,
   "type": "module",
   "scripts": {

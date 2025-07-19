@@ -8,7 +8,7 @@
   "private": true,
   "workspaces": [
     "apps/backend",
-    "apps/browse",
+    "apps/category",
     "apps/pdp"
   ],
   "dependencies": {
