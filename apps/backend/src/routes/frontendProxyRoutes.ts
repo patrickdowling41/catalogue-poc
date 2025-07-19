@@ -4,7 +4,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 const router: Router = Router();
 
 router.use(
-  '/browse',
+  '/category',
   createProxyMiddleware({
     target: 'http://localhost:5173',
     changeOrigin: true,

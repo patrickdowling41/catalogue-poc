@@ -1,17 +1,22 @@
-class Product {
-  private products: Array<{ id: number; name: string; price: number }>;
-  constructor() {
-    this.products = [
-      { id: 1, name: 'Product A', price: 100 },
-      { id: 2, name: 'Product B', price: 200 },
-    ];
-  }
+import { IProduct } from '../types/Product';
+import { createFakeProducts } from '../utils/faker';
 
-  find(): Promise<Array<{ id: number; name: string; price: number }>> {
+class Product {
+  async find(): Promise<IProduct[]> {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(this.products);
-      }, 1000);
+        const products = createFakeProducts({ count: 25 });
+        return resolve(products);
+      }, 100);
+    });
+  }
+
+  async findBySku(sku: string): Promise<IProduct | null> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const product = createFakeProducts({ sku: sku, count: 1 })[0];
+        return resolve(product || null);
+      }, 100);
     });
   }
 }

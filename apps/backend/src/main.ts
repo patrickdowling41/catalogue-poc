@@ -7,7 +7,10 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/', frontendProxyRoutes);
+// Double as Reverse Proxy in development mode (handled by CloudFront in production)
+if (process.env.NODE_ENV === 'development') {
+  app.use('/', frontendProxyRoutes);
+}
 
 app.use('/api/product', productRoutes);
 
