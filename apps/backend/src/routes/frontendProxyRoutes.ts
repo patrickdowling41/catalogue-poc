@@ -13,23 +13,6 @@ const productProxy = createProxyMiddleware({
   changeOrigin: true,
 });
 
-router.use('*', (req, res, next) => {
-  const referer = req.headers.referer || '';
-
-  // Handles Express stripping __manifest from the URL
-  if (req.baseUrl.startsWith('/__manifest')) {
-    req.url = req.url.replace('/', '/__manifest');
-  }
-
-  // Proxy Requests from referer back to the correct frontend
-  if (referer.includes('/category')) {
-    return categoryProxy(req, res, next);
-  } else if (referer.includes('/product')) {
-    return productProxy(req, res, next);
-  }
-  next();
-});
-
 router.use(
   '/category/*',
   createProxyMiddleware({
@@ -47,5 +30,32 @@ router.use(
     ws: true,
   })
 );
+
+router.use('*', (req, res, next) => {
+  const referer = req.headers.referer || '';
+
+  const excludedRoutes = ['/api'];
+
+  // Skip frontend routes
+  excludedRoutes.forEach((route) => {
+    if (req.url.includes(route)) {
+      return;
+    }
+  });
+
+  // Handles Express stripping __manifest from the URL
+  if (req.baseUrl.startsWith('/__manifest')) {
+    req.url = req.url.replace('/', '/__manifest');
+  }
+
+  // Proxy Requests from referer back to the correct frontend
+  if (referer.includes('/category')) {
+    console.log(req.url);
+    return categoryProxy(req, res, next);
+  } else if (referer.includes('/product')) {
+    return productProxy(req, res, next);
+  }
+  next();
+});
 
 export default router;
