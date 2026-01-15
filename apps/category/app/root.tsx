@@ -6,6 +6,7 @@ import {
   ScrollRestoration,
 } from '@remix-run/react';
 import type { MetaFunction, LinksFunction } from '@remix-run/node';
+import './styles.css';
 
 export const meta: MetaFunction = () => [
   {

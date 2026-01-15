@@ -19,6 +19,7 @@ const Category = () => {
 
   return (
     <div className="flex flex-col items-center mt-10">
+      <a href="http://localhost:3000/product/abc123">Product abc</a>
       <h1 className="text-4xl font-bold text-gray-800 mb-4">
         Category - {category}
       </h1>

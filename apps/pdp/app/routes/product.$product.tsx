@@ -1,6 +1,7 @@
 const Product = () => {
   return (
     <div className="flex flex-col items-center mt-10">
+      <a href="http://localhost:3000/category/abc123">Category abc</a>
       <h1 className="text-4xl font-bold text-gray-800 mb-4">Product - </h1>
     </div>
   );
