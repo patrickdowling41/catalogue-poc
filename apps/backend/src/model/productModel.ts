@@ -19,6 +19,15 @@ class Product {
       }, 100);
     });
   }
+
+  async findByCategory(category: string): Promise<IProduct[]> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const products = createFakeProducts({ category, count: 25 });
+        return resolve(products);
+      });
+    });
+  }
 }
 
 export default Product;

@@ -3,11 +3,20 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const router: Router = Router();
 
+const baseCategoryProxyConfig = {
+  target: `${process.env.BASE_URL}:${process.env.CATEGORY_PORT}`,
+  changeOrigin: true,
+};
+
+const baseProductProxyConfig = {
+  target: `${process.env.BASE_URL}:${process.env.PRODUCT_PORT}`,
+  changeOrigin: true,
+};
+
 router.use(
-  '/category',
+  '/category/*',
   createProxyMiddleware({
-    target: 'http://localhost:5173',
-    changeOrigin: true,
+    ...baseCategoryProxyConfig,
     ws: true,
   })
 );
@@ -15,8 +24,7 @@ router.use(
 router.use(
   '/product/*',
   createProxyMiddleware({
-    target: 'http://localhost:5174',
-    changeOrigin: true,
+    ...baseProductProxyConfig,
     ws: true,
   })
 );
@@ -24,25 +32,27 @@ router.use(
 router.use('*', (req, res, next) => {
   const referer = req.headers.referer || '';
 
-  // Handle case where __manifest is stripped out from the URL by Express
-  const baseUrl = req.baseUrl || '';
-  if (baseUrl.includes('__manifest')) {
-    req.url = baseUrl;
+  const excludedRoutes = ['/api'];
+
+  // Skip frontend routes
+  excludedRoutes.forEach((route) => {
+    if (req.url.includes(route)) {
+      return;
+    }
+  });
+
+  // Handles Express stripping __manifest from the URL
+  if (req.baseUrl.startsWith('/__manifest')) {
+    req.url = req.url.replace('/', '/__manifest');
   }
 
-  // Proxy Requests from referer back to the correct frontend
-  if (referer.includes('/browse')) {
-    return createProxyMiddleware({
-      target: 'http://localhost:5173',
-      changeOrigin: true,
-    })(req, res, next);
+  if (referer.includes('/category')) {
+    // Proxy Requests from referer back to the correct frontend
+    return createProxyMiddleware(baseCategoryProxyConfig)(req, res, next);
   } else if (referer.includes('/product')) {
-    return createProxyMiddleware({
-      target: 'http://localhost:5174',
-      changeOrigin: true,
-    })(req, res, next);
+    return createProxyMiddleware(baseProductProxyConfig)(req, res, next);
   }
-  return next();
+  next();
 });
 
 export default router;

@@ -4,8 +4,10 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from '@remix-run/react';
 import type { MetaFunction, LinksFunction } from '@remix-run/node';
+import './styles.css';
 
 export const meta: MetaFunction = () => [
   {
@@ -24,9 +26,24 @@ export const links: LinksFunction = () => [
     rel: 'stylesheet',
     href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
   },
+  {
+    rel: 'icon',
+    href: '/favicon.ico',
+  },
 ];
 
+export async function loader() {
+  return {
+    ENV: {
+      PRODUCT_ROUTE: process.env.PRODUCT_ROUTE,
+      CATEGORY_ROUTE: process.env.CATEGORY_ROUTE,
+      API_ROUTE: process.env.API_ROUTE,
+    },
+  };
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
+  const data = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -34,15 +51,31 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <base href="http://localhost:5174/" />
       </head>
       <body>
         {children}
         <ScrollRestoration />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+          }}
+        />
         <Scripts />
       </body>
     </html>
   );
+}
+
+type EnvironmentVars = {
+  API_ROUTE: string;
+  CATEGORY_ROUTE: string;
+  PRODUCT_ROUTE: string;
+};
+
+declare global {
+  interface Window {
+    ENV: EnvironmentVars;
+  }
 }
 
 export default function App() {

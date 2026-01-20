@@ -4,13 +4,13 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/browse"
-    },
-    {
       "path": "./apps/pdp"
     },
     {
       "path": "./apps/backend"
+    },
+    {
+      "path": "./apps/category"
     }
   ]
 }
