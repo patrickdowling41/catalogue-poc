@@ -35,9 +35,9 @@ jobs:
       # When you enable task distribution, run the e2e-ci task instead of e2e
       - run: npx nx run-many -t lint test 2>&1 | cat
 
-      - run: npx nx run-many -t build
-        # If you want to run the e2e tests, uncomment the following line
-        # - run: npx nx run-many -t e2e --parallel --maxParallel=3
+      # - run: npx nx run-many -t build
+      # If you want to run the e2e tests, uncomment the following line
+      # - run: npx nx run-many -t e2e --parallel --maxParallel=3
       # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/ci/features/self-healing-ci
       - run: npx nx fix-ci
         if: always()
