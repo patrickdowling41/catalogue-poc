@@ -1,5 +1,4 @@
 import {
-  json,
   Links,
   Meta,
   Outlet,
@@ -33,23 +32,50 @@ export const links: LinksFunction = () => [
   },
 ];
 
+export async function loader() {
+  return {
+    ENV: {
+      PRODUCT_ROUTE: process.env.PRODUCT_ROUTE,
+      CATEGORY_ROUTE: process.env.CATEGORY_ROUTE,
+      API_ROUTE: process.env.API_ROUTE,
+    },
+  };
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
+  const data = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* <base href={`${REMIX_BASE_URL}:${REMIX_PORT}/`} /> */}
         <Meta />
         <Links />
       </head>
       <body>
         {children}
         <ScrollRestoration />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+          }}
+        />
         <Scripts />
       </body>
     </html>
   );
+}
+
+type EnvironmentVars = {
+  API_ROUTE: string;
+  CATEGORY_ROUTE: string;
+  PRODUCT_ROUTE: string;
+};
+
+declare global {
+  interface Window {
+    ENV: EnvironmentVars;
+  }
 }
 
 export default function App() {

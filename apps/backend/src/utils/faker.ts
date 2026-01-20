@@ -8,9 +8,7 @@ const createFakeProducts = ({
 }: ICreateFakeProduct): IProduct[] => {
   return faker.helpers.multiple(
     () => ({
-      sku: sku
-        ? String(sku)
-        : faker.number.int({ min: 1, max: 1000 }).toString(),
+      sku: sku ? String(sku) : faker.commerce.productName(),
       name: faker.commerce.productName(),
       price: parseFloat(faker.commerce.price()),
       rating: faker.number.int({ min: 10, max: 50 }),

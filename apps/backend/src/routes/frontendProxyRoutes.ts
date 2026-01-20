@@ -3,21 +3,20 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const router: Router = Router();
 
-const categoryProxy = createProxyMiddleware({
-  target: 'http://localhost:5173',
+const baseCategoryProxyConfig = {
+  target: `${process.env.BASE_URL}:${process.env.CATEGORY_PORT}`,
   changeOrigin: true,
-});
+};
 
-const productProxy = createProxyMiddleware({
-  target: 'http://localhost:5174',
+const baseProductProxyConfig = {
+  target: `${process.env.BASE_URL}:${process.env.PRODUCT_PORT}`,
   changeOrigin: true,
-});
+};
 
 router.use(
   '/category/*',
   createProxyMiddleware({
-    target: 'http://localhost:5173',
-    changeOrigin: true,
+    ...baseCategoryProxyConfig,
     ws: true,
   })
 );
@@ -25,8 +24,7 @@ router.use(
 router.use(
   '/product/*',
   createProxyMiddleware({
-    target: 'http://localhost:5174',
-    changeOrigin: true,
+    ...baseProductProxyConfig,
     ws: true,
   })
 );
@@ -48,12 +46,11 @@ router.use('*', (req, res, next) => {
     req.url = req.url.replace('/', '/__manifest');
   }
 
-  // Proxy Requests from referer back to the correct frontend
   if (referer.includes('/category')) {
-    console.log(req.url);
-    return categoryProxy(req, res, next);
+    // Proxy Requests from referer back to the correct frontend
+    return createProxyMiddleware(baseCategoryProxyConfig)(req, res, next);
   } else if (referer.includes('/product')) {
-    return productProxy(req, res, next);
+    return createProxyMiddleware(baseProductProxyConfig)(req, res, next);
   }
   next();
 });

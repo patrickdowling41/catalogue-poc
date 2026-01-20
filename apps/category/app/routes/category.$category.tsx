@@ -11,6 +11,10 @@ const Category = () => {
 
   const [productsByCategory, setProductsByCategory] = useState<IProduct[]>([]);
 
+  const getProductRoute = (productSku: string) => {
+    return `${window.ENV.PRODUCT_ROUTE}/${productSku}`;
+  };
+
   useEffect(() => {
     productApi.getProductsByCategory(category || '').then((products) => {
       setProductsByCategory(() => products);
@@ -19,13 +23,13 @@ const Category = () => {
 
   return (
     <div className="flex flex-col items-center mt-10">
-      <a href="http://localhost:3000/product/abc123">Product abc</a>
+      <a href={getProductRoute('abc123')}>Product abc</a>
       <h1 className="text-4xl font-bold text-gray-800 mb-4">
         Category - {category}
       </h1>
       <Suspense fallback="<div>Loading...</div>">
-        {productsByCategory.map((product) => {
-          return <ProductTile product={product} />;
+        {productsByCategory.map((product, i) => {
+          return <ProductTile key={`product-${i}`} product={product} />;
         })}
       </Suspense>
     </div>

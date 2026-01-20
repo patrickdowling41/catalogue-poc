@@ -1,9 +1,12 @@
 import express from 'express';
+import path from 'path';
 
 import frontendProxyRoutes from './routes/frontendProxyRoutes';
 import productRoutes from './routes/productRoutes';
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, 'assets')));
 
 app.use(express.json());
 
